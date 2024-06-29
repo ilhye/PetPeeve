@@ -12,9 +12,11 @@ function getRandomWeather() {
   return weathers[randomIndex];
 }
 
+formatDate();
+
 function formatDate() {
   const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const monthNows = [
+  const month = [
     "Jan",
     "Feb",
     "Mar",
@@ -32,7 +34,7 @@ function formatDate() {
   const dateNow = new Date();
   const dayOfWeek = day[dateNow.getDay()];
   const dateOfWeek = String(dateNow.getDate());
-  const monthNow = monthNows[dateNow.getmonthNow()];
+  const monthNow = month[dateNow.getMonth()];
 
   date.innerHTML = `${dayOfWeek}, ${dateOfWeek} ${monthNow}`;
 }
