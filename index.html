@@ -22,16 +22,10 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div id="proj-header">
+      <h3 class="proj-title m-0">PetPeeve</h3>
+    </div>
     <div class="container">
-      <div class="proj-header">
-        <img
-          src="https://via.placeholder.com/24x24"
-          alt="PetPeeve"
-          class="me-2"
-        />
-        <h3 class="proj-title mb-0">PetPeeve</h3>
-      </div>
-
       <p id="location">
         <img
           src="./assets/location.png"
@@ -41,11 +35,16 @@
       </p>
       <p id="date">Wed, 08 May</p>
 
-      <div class="card rounded-4">
+      <div class="card rounded-4" id="weather-card">
         <div class="card-body">
           <div class="row text-center">
-            <div class="col-6 p-3" id="img-weather">
-              <img src="./assets/Sun.png" alt="Sun"/>
+            <div class="col-6 p-3">
+              <img
+                src="./assets/cloudy.png"
+                class="img-fluid"
+                alt="Sun"
+                id="img-weather"
+              />
             </div>
             <div class="col-6 p-3 m-auto">
               <p id="temperature" class="mb-0">35°C</p>
@@ -57,27 +56,10 @@
 
       <div class="pet-tips">
         <p class="pet-tips-title">Pet Tips</p>
-        <ol id="message">
-          <li>
-            Hydrate your pet with fresh water, limit midday walks, and provide
-            shade for cool naps.
-          </li>
-          <li>
-            Cool down your pet with damp towels, early walks, and kiddie pools
-            for a refreshing dip.
-          </li>
-          <li>
-            Fresh water, shady spots, and paw protection are your pet's summer
-            essentials!
-          </li>
-        </ol>
+        <ol id="message"></ol>
       </div>
     </div>
 
-    <script>
-      function weatherVisual(weather) {
-        
-      }
-    </script>
+    <script src="./script.js"></script>
   </body>
 </html>

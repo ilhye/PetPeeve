@@ -5,11 +5,15 @@ body {
   font-family: Inter;
 }
 
-.proj-header {
-  margin-top: 34px;
+.container {
+  max-width: 700px;
+  justify-content: center;
+}
+
+#proj-header {
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding: 15px;
 }
 
 .proj-title {
@@ -38,9 +42,12 @@ body {
   font-size: 18px;
 }
 
+#img-weather {
+  max-height: 200px;
+}
+
 .card {
   margin-top: 25px;
-  background: linear-gradient(121deg, #f6f6f6 31.21%, #fcc949 167.04%);
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
 }
 
