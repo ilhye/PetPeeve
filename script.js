@@ -7,7 +7,7 @@ const cardColor = document.getElementById("weather-card");
 const headerBg = document.getElementById("proj-header");
 
 function getRandomWeather() {
-  const weathers = ["cloudy", "sunny"];
+  const weathers = ["cloudy", "sunny", "rainy"];
   const randomIndex = Math.floor(Math.random() * weathers.length);
   return weathers[randomIndex];
 }
@@ -42,7 +42,7 @@ function formatDate() {
 function temp() {
   // insert logic for changing temperature and its description
   temperature.innerHTML = "35°C";
-  tempMode.innerHTML = "Sunny";
+  tempMode.innerHTML = "Sunny"; 
 }
 
 function weatherVisual() {
@@ -56,9 +56,9 @@ function weatherVisual() {
         <li>Keep your pet comfortable indoors with cozy bedding and toys.</li>
         <li>Take short walks with your pet and avoid prolonged exposure to damp weather.</li>
         <li>Monitor your pet's behavior for signs of anxiety during cloudy periods.</li>`;
-      headerBg.style.backgroundColor = "#d6ffff";
+      headerBg.style.backgroundColor = "#def3f6ff";
       cardColor.style.background =
-        "linear-gradient(121deg, #f6f6f6 31.21%, #96f1ff 167.04%)";
+        "linear-gradient(121deg, #f6f6f6 31.21%, #def3f6ff 167.04%)";
       break;
     case "sunny":
       weather.src = "./assets/sunny.png";
@@ -71,6 +71,17 @@ function weatherVisual() {
       cardColor.style.background =
         "linear-gradient(121deg, #f6f6f6 31.21%, #fcc949 167.04%)";
 
+      break;
+    case "rainy":
+      weather.src = "./assets/rainy.png";
+      messageList.innerHTML = "";
+      messageList.innerHTML = `
+        <li>Hydrate your pet with fresh water, limit midday walks, and provide shade for cool naps.</li>
+        <li>Cool down your pet with damp towels, early walks, and kiddie pools for a refreshing dip.</li>
+        <li>Fresh water, shady spots, and paw protection are your pet's summer essentials!</li>`;
+      headerBg.style.backgroundColor = '#71bce4ff';
+      cardColor.style.background =
+        "linear-gradient(121deg, #f6f6f6 31.21%, #71bce4ff 167.04%)";
       break;
   }
 }
