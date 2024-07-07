@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PetPeeve</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div id="proj-header">
+      <h3 class="proj-title m-0">PetPeeve</h3>
+    </div>
+    <div class="container">
+      <p id="location">
+        <img
+          src="{{ url_for('static', filename='location.png') }}"
+          alt="location"
+          class="w-14 h-19 me-2"
+        />Philippines
+      </p>
+      <p id="date"></p>
+
+      <div class="card rounded-4" id="weather-card">
+        <div class="card-body">
+          <div class="row text-center">
+            <div class="col-6 p-3">
+              <img
+                src="{{ url_for('static', filename='cloudy.png') }}"
+                class="img-fluid"
+                alt="Sun"
+                id="img-weather"
+              />
+            </div>
+            <div class="col-6 p-3 m-auto">
+              <p id="temperature" class="mb-0">35°C</p>
+              <p id="temp-mode">Clear Sky</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pet-tips">
+        <p class="pet-tips-title">Pet Tips</p>
+        <ol id="message"></ol>
+      </div>
+    </div>
+
+    <script>
+      const weather = document.getElementById("img-weather");
+      const messageList = document.getElementById("message");
+      const temperature = document.getElementById("temperature");
+      const tempMode = document.getElementById("temp-mode");
+      const date = document.getElementById("date");
+      const cardColor = document.getElementById("weather-card");
+      const headerBg = document.getElementById("proj-header");
+
+      function getRandomWeather() {
+        const weathers = ["cloudy", "sunny", "rainy"];
+        const randomIndex = Math.floor(Math.random() * weathers.length);
+        return weathers[randomIndex];
+      }
+      async function callOpenWeatherMap(lat, long) {
+        try {
+          urlOpenWeatherMap = 'https://api.openweathermap.org/data/2.5/weather?' + 'lat=' + lat + '&lon=' + long + '&appid={{ API_KEY }}'
+          const response = await fetch(urlOpenWeatherMap);
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          const data = await response.json();
+          return data
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          throw error
+        }
+      }
+
+      async function success(position) {
+        console.log(position.coords.latitude, position.coords.longitude);
+        const lat = position.coords.latitude
+        const long = position.coords.longitude
+        let openWeatherMapData = await callOpenWeatherMap(lat, long);
+        console.log(openWeatherMapData);
+
+      }
+
+      function error() {
+        alert("Sorry, no position available.");
+        location.reload()
+      }
+
+      const options = {
+        enableHighAccuracy: true,
+        maximumAge: 30000,
+        timeout: 27000,
+      };
+
+      const watchID = navigator.geolocation.watchPosition(success, error, options);
+
+      formatDate();
+
+      function formatDate() {
+        const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        const month = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
+
+        const dateNow = new Date();
+        const dayOfWeek = day[dateNow.getDay()];
+        const dateOfWeek = String(dateNow.getDate());
+        const monthNow = month[dateNow.getMonth()];
+
+        date.innerHTML = `${dayOfWeek}, ${dateOfWeek} ${monthNow}`;
+      }
+
+      function temp() {
+        // insert logic for changing temperature and its description
+        temperature.innerHTML = "35°C";
+        tempMode.innerHTML = "Sunny"; 
+      }
+
+      function weatherVisual() {
+        const weatherCondition = getRandomWeather();
+
+        switch (weatherCondition) {
+          case "cloudy":
+            weather.src = "{{ url_for('static', filename='cloudy.png') }}";
+            messageList.innerHTML = "";
+            messageList.innerHTML = `
+              <li>Keep your pet comfortable indoors with cozy bedding and toys.</li>
+              <li>Take short walks with your pet and avoid prolonged exposure to damp weather.</li>
+              <li>Monitor your pet's behavior for signs of anxiety during cloudy periods.</li>`;
+            headerBg.style.backgroundColor = "#def3f6ff";
+            cardColor.style.background =
+              "linear-gradient(121deg, #f6f6f6 31.21%, #def3f6ff 167.04%)";
+            break;
+          case "sunny":
+            weather.src = "{{ url_for('static', filename='sunny.png') }}";
+            messageList.innerHTML = "";
+            messageList.innerHTML = `
+              <li>Hydrate your pet with fresh water, limit midday walks, and provide shade for cool naps.</li>
+              <li>Cool down your pet with damp towels, early walks, and kiddie pools for a refreshing dip.</li>
+              <li>Fresh water, shady spots, and paw protection are your pet's summer essentials!</li>`;
+            headerBg.style.backgroundColor = '#fcffd6';
+            cardColor.style.background =
+              "linear-gradient(121deg, #f6f6f6 31.21%, #fcc949 167.04%)";
+
+            break;
+          case "rainy":
+            weather.src = "{{ url_for('static', filename='rainy.png') }}";
+            messageList.innerHTML = "";
+            messageList.innerHTML = `
+              <li>Hydrate your pet with fresh water, limit midday walks, and provide shade for cool naps.</li>
+              <li>Cool down your pet with damp towels, early walks, and kiddie pools for a refreshing dip.</li>
+              <li>Fresh water, shady spots, and paw protection are your pet's summer essentials!</li>`;
+            headerBg.style.backgroundColor = '#71bce4ff';
+            cardColor.style.background =
+              "linear-gradient(121deg, #f6f6f6 31.21%, #71bce4ff 167.04%)";
+            break;
+        }
+      }
+
+      weatherVisual();
+
+    </script>
+  </body>
+</html>
