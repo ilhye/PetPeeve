@@ -4,4 +4,6 @@ __pycache__
 
 tmp
 
+.env
+
 tempCodeRunnerFile.py
