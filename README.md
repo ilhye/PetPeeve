@@ -2,9 +2,11 @@
 This is a Flask web application that provides pet care tips based on the user's current weather and heat index. It utilizes a custom hashing and collision algorithm (hash table) implementation with a fast look up of O(1).
 
 ## Authors
-
-- [@ilhye](https://github.com/ilhye)
-- [@veenoise](https://github.com/veenoise)
+- Chua, William Eduard M. ([@veenoise](https://github.com/veenoise))
+- David, Abdurasheed A.
+- Egera, Ashley I.
+- Rolle, Xavier
+- Villasor, Cristina C. ([@ilhye](https://github.com/ilhye))
 
 ## Features
 - Climate-based pet care tips.
