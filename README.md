@@ -28,7 +28,7 @@ This is a Flask web application that provides pet care tips based on the user's 
 ```
 4. Install dependencies:
 ```
-    pip3 install -r requirements.txt
+    pip install -r requirements.txt
 ```
 
 5. Run the application:
