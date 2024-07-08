@@ -27,6 +27,7 @@ body {
 
 #date {
   left: 22px;
+  width: 100px;
   position: relative;
   font-size: 14.81px;
   color: #828282;
@@ -69,5 +70,22 @@ body {
 
 #message {
   font-size: 16px;
+  padding-left: 10px;
   text-align: justify;
+}
+
+@media screen and (max-width: 769px) {
+  #temperature {
+    font-size: 24px;
+  }
+
+  .pet-tips {
+    margin-top: 15px;
+  }
+  #locatio,
+  #date,
+  #message,
+  #temp-mode {
+    font-size: 14px;
+  }
 }

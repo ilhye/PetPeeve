@@ -19,7 +19,10 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
   </head>
   <body>
     <div id="proj-header">
@@ -69,20 +72,21 @@
       const date = document.getElementById("date");
       const cardColor = document.getElementById("weather-card");
       const headerBg = document.getElementById("proj-header");
-      const locationToUpdate = document.querySelector('#location-update')
+      const locationToUpdate = document.querySelector("#location-update");
+      const API_KEY = "{{ API_KEY }}";
 
       async function callOpenWeatherMap(lat, long) {
         try {
-          urlOpenWeatherMap = 'https://api.openweathermap.org/data/2.5/weather?' + 'lat=' + lat + '&lon=' + long + '&appid={{ API_KEY }}'+'&units=metric'
+          urlOpenWeatherMap = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`;
           const response = await fetch(urlOpenWeatherMap);
           if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error("Network response was not ok");
           }
           const data = await response.json();
-          return data
+          return data;
         } catch (error) {
-          console.error('Error fetching data in OpenWeatherMap:', error);
-          throw error
+          console.error("Error fetching data in OpenWeatherMap:", error);
+          throw error;
         }
       }
 
@@ -90,109 +94,124 @@
         fetch('{{ url_for("home") }}', {
           method: "POST",
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            'weather': paramWeather,
-            'heatIndex': paramHeatIndex 
-          })
+            weather: paramWeather,
+            heatIndex: paramHeatIndex,
+          }),
         })
-        .then(e => e.json())
-        .then(e => {
-          const catTip = e[0].map(item => "<li>" + item + "</li>")
-          const dogTip = e[1].map(item => "<li>" + item + "</li>")
-          let catTipStr = ""
-          let dogTipStr = ""
-          
-          messageList.innerHTML = "";
-          messageList.innerHTML = "<h4 class='pet-tips-subtitle'>Cat</h4>"
-          
-          catTipStr += "<ol>"
-          
-          catTip.forEach(element => {
-            catTipStr += element
+          .then((e) => e.json())
+          .then((e) => {
+            const catTip = e[0].map((item) => "<li>" + item + "</li>");
+            const dogTip = e[1].map((item) => "<li>" + item + "</li>");
+            let catTipStr = "";
+            let dogTipStr = "";
+
+            messageList.innerHTML = "";
+            messageList.innerHTML = "<h4 class='pet-tips-subtitle'>Cat</h4>";
+
+            catTipStr += "<ol id='cat-tips'>";
+
+            catTip.forEach((element) => {
+              catTipStr += element;
+            });
+
+            catTipStr += "</ol>";
+
+            messageList.innerHTML += catTipStr;
+            messageList.innerHTML += "<h4 class='pet-tips-subtitle'>Dog</h4>";
+
+            dogTipStr += "<ol id='dog-tips'>";
+
+            dogTip.forEach((element) => {
+              dogTipStr += element;
+            });
+
+            dogTipStr += "</ol>";
+
+            messageList.innerHTML += dogTipStr;
           });
-          
-          catTipStr += "</ol>"
-
-          messageList.innerHTML += catTipStr
-          
-          messageList.innerHTML += "<h4 class='pet-tips-subtitle'>Dog</h4>"
-
-          dogTipStr += "<ol>"
-
-          dogTip.forEach(element => {
-            dogTipStr += element
-          });
-
-          dogTipStr += "</ol>"
-
-          messageList.innerHTML += dogTipStr
-        })
       }
 
-      if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(
-          async position => {
-            const lat = position.coords.latitude
-            const long = position.coords.longitude
-            let openWeatherMapData = await callOpenWeatherMap(lat, long);
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const lat = position.coords.latitude;
+          const long = position.coords.longitude;
+          let openWeatherMapData = await callOpenWeatherMap(lat, long);
 
-            let resultCountry = openWeatherMapData['sys']['country'];
-            let resultCity = openWeatherMapData['name'];
-            let resultTemp = String(Math.round(openWeatherMapData['main']['temp'])) + '°C';
-            let resultHeatIndex = Math.round(openWeatherMapData['main']['feels_like']);
-            let resultWeatherMain = openWeatherMapData['weather'][0]['main'];
-            let resultWeatherDesc = openWeatherMapData['weather'][0]['description'];
-            let resultHeatIndexDesc;
-            let resultWeather;
+          let resultCountry = openWeatherMapData["sys"]["country"];
+          let resultCity = openWeatherMapData["name"];
+          let resultTemp =
+            String(Math.round(openWeatherMapData["main"]["temp"])) + "°C";
+          let resultHeatIndex = Math.round(
+            openWeatherMapData["main"]["feels_like"]
+          );
+          let resultWeatherMain = openWeatherMapData["weather"][0]["main"];
+          let resultWeatherDesc =
+            openWeatherMapData["weather"][0]["description"];
+          let resultHeatIndexDesc;
+          let resultWeather;
 
-            // Logic for managing weather
-            if (resultWeatherMain === 'Thunderstorm' || resultWeatherMain === 'Drizzle' || resultWeatherMain === 'Rain') {
-              resultWeather = 'Rainy'
-              weather.src = "{{ url_for('static', filename='rainy.png') }}";
-              headerBg.style.backgroundColor = '#71bce4ff';
-              cardColor.style.background = "linear-gradient(121deg, #f6f6f6 31.21%, #71bce4ff 167.04%)";
-            } else if (resultWeatherMain === 'Clouds') {
-              if (resultWeatherDesc === 'few clouds' || resultWeatherDesc === 'scattered clouds') {
-                resultWeather = 'Sunny'
-                weather.src = "{{ url_for('static', filename='sunny.png') }}";
-                headerBg.style.backgroundColor = '#fcffd6';
-                cardColor.style.background = "linear-gradient(121deg, #f6f6f6 31.21%, #fcc949 167.04%)";
-              } else if (resultWeatherDesc === 'broken clouds' || resultWeatherDesc == 'overcast clouds') {
-                resultWeather = 'Cloudy'
-                weather.src = "{{ url_for('static', filename='cloudy.png') }}";
-                headerBg.style.backgroundColor = "#def3f6ff";
-                cardColor.style.background = "linear-gradient(121deg, #f6f6f6 31.21%, #def3f6ff 167.04%)";
-              }
-            } else if (resultWeatherMain === 'Clear') {
-              weather.src = "{{ url_for('static', filename='clear.png') }}";
+          // Logic for managing weather
+          if (
+            resultWeatherMain === "Thunderstorm" ||
+            resultWeatherMain === "Drizzle" ||
+            resultWeatherMain === "Rain"
+          ) {
+            resultWeather = "Rainy";
+            weather.src = "{{ url_for('static', filename='rainy.png') }}";
+            headerBg.style.backgroundColor = "#71bce4ff";
+            cardColor.style.background =
+              "linear-gradient(121deg, #f6f6f6 31.21%, #71bce4ff 167.04%)";
+          } else if (resultWeatherMain === "Clouds") {
+            if (
+              resultWeatherDesc === "few clouds" ||
+              resultWeatherDesc === "scattered clouds"
+            ) {
+              resultWeather = "Sunny";
+              weather.src = "{{ url_for('static', filename='sunny.png') }}";
               headerBg.style.backgroundColor = "#fcffd6";
-              cardColor.style.background = "linear-gradient(121deg, #f6f6f6 31.21%, #fcc949 167.04%)";
+              cardColor.style.background =
+                "linear-gradient(121deg, #f6f6f6 31.21%, #fcc949 167.04%)";
+            } else if (
+              resultWeatherDesc === "broken clouds" ||
+              resultWeatherDesc == "overcast clouds"
+            ) {
+              resultWeather = "Cloudy";
+              weather.src = "{{ url_for('static', filename='cloudy.png') }}";
+              headerBg.style.backgroundColor = "#def3f6ff";
+              cardColor.style.background =
+                "linear-gradient(121deg, #f6f6f6 31.21%, #def3f6ff 167.04%)";
             }
-
-            // Logic for managing heat index
-            if (resultHeatIndex <= 31) {
-              resultHeatIndexDesc = 'Caution'
-            } else if (resultHeatIndex >= 32 && resultHeatIndex <= 40) {
-              resultHeatIndexDesc = 'Extreme Caution'
-            } else if (resultHeatIndex >= 41 && resultHeatIndex <= 53) {
-              resultHeatIndexDesc = 'Danger'
-            } else {
-              resultHeatIndexDesc = 'Extreme Danger'
-            }
-
-            // Calling the server for tips
-            getSuggestion(resultWeather, resultHeatIndexDesc)
-
-            // Render updates
-            temperature.innerHTML = resultTemp;
-            tempMode.innerHTML = resultWeather; 
-            locationToUpdate.innerHTML = resultCity + ", " + resultCountry;
+          } else if (resultWeatherMain === "Clear") {
+            weather.src = "{{ url_for('static', filename='clear.png') }}";
+            headerBg.style.backgroundColor = "#fcffd6";
+            cardColor.style.background =
+              "linear-gradient(121deg, #f6f6f6 31.21%, #fcc949 167.04%)";
           }
-        );
+
+          // Logic for managing heat index
+          if (resultHeatIndex <= 31) {
+            resultHeatIndexDesc = "Caution";
+          } else if (resultHeatIndex >= 32 && resultHeatIndex <= 40) {
+            resultHeatIndexDesc = "Extreme Caution";
+          } else if (resultHeatIndex >= 41 && resultHeatIndex <= 53) {
+            resultHeatIndexDesc = "Danger";
+          } else {
+            resultHeatIndexDesc = "Extreme Danger";
+          }
+
+          // Calling the server for tips
+          getSuggestion(resultWeather, resultHeatIndexDesc);
+
+          // Render updates
+          temperature.innerHTML = resultTemp;
+          tempMode.innerHTML = resultWeather;
+          locationToUpdate.innerHTML = resultCity + ", " + resultCountry;
+        });
       } else {
-        console.log("Location not available")
+        console.log("Location not available");
       }
 
       formatDate();
