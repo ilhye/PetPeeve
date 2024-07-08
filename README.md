@@ -1,36 +1,39 @@
 
 # PetPeeve: Climate Check & Pet Wellness
+This is a Flask web application that provides pet care tips based on the user's current weather and heat index. It utilizes a custom hashing and collision algorithm (hash table) implementation with a fast look up of O(1). 
 
-This is a flask web application for pet care tips depending on user's weather and heat index based off of their location and utilizing a user-defined hashing and collision algorithm (hash table) implementation for the fast O(1) average time complexity lookup. 
 
 ## Authors
-
 - [@ilhye](https://github.com/ilhye)
 - [@veenoise](https://github.com/veenoise)
 
 
+## Features
+- Climate-based pet care tips.
+- User location integration.
+- Custom hash table implementation for efficient data retrieval.
+
+
 ## Deployment
-
-To deploy this project create a python virtual environment
-
-```bash
+Set up a Python virtual environment:
+```
 python3 -m venv .venv
 ```
 
 Activate the python virtual environment
-
-```bash
-source .venv/bin/activate
+```
+source venv/bin/activate
 ```
 
 Install dependencies
-
-```bash
+```
 pip3 install -r requirements.txt
 ```
-
 Run the application
-
-```bash
+```
 python3 app.py
 ```
+## Usage
+- Open your web browser
+- Allow location access when prompted.
+- View pet care tips based on the current weather and heat index.
