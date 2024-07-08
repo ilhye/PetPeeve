@@ -31,7 +31,8 @@
           src="{{ url_for('static', filename='location.png') }}"
           alt="location"
           class="w-14 h-19 me-2"
-        />Philippines
+        />
+        <span id="location-update"></span>
       </p>
       <p id="date"></p>
 
@@ -47,7 +48,7 @@
               />
             </div>
             <div class="col-6 p-3 m-auto">
-              <p id="temperature" class="mb-0">35°C</p>
+              <p id="temperature" class="mb-0"></p>
               <p id="temp-mode">Clear Sky</p>
             </div>
           </div>
@@ -68,15 +69,11 @@
       const date = document.getElementById("date");
       const cardColor = document.getElementById("weather-card");
       const headerBg = document.getElementById("proj-header");
+      const locationToUpdate = document.querySelector('#location-update')
 
-      function getRandomWeather() {
-        const weathers = ["cloudy", "sunny", "rainy"];
-        const randomIndex = Math.floor(Math.random() * weathers.length);
-        return weathers[randomIndex];
-      }
       async function callOpenWeatherMap(lat, long) {
         try {
-          urlOpenWeatherMap = 'https://api.openweathermap.org/data/2.5/weather?' + 'lat=' + lat + '&lon=' + long + '&appid={{ API_KEY }}'
+          urlOpenWeatherMap = 'https://api.openweathermap.org/data/2.5/weather?' + 'lat=' + lat + '&lon=' + long + '&appid={{ API_KEY }}'+'&units=metric'
           const response = await fetch(urlOpenWeatherMap);
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -84,32 +81,121 @@
           const data = await response.json();
           return data
         } catch (error) {
-          console.error('Error fetching data:', error);
+          console.error('Error fetching data in OpenWeatherMap:', error);
           throw error
         }
       }
 
-      async function success(position) {
-        console.log(position.coords.latitude, position.coords.longitude);
-        const lat = position.coords.latitude
-        const long = position.coords.longitude
-        let openWeatherMapData = await callOpenWeatherMap(lat, long);
-        console.log(openWeatherMapData);
+      function getSuggestion(paramWeather, paramHeatIndex) {
+        console.log(paramWeather + " " + paramHeatIndex)
+        fetch('{{ url_for("home") }}', {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            'weather': paramWeather,
+            'heatIndex': paramHeatIndex 
+          })
+        })
+        .then(e => e.json())
+        .then(e => {
+          const catTip = e[0].map(item => "<li>" + item + "</li>")
+          const dogTip = e[1].map(item => "<li>" + item + "</li>")
+          let catTipStr = ""
+          let dogTipStr = ""
+          
+          messageList.innerHTML = "";
+          messageList.innerHTML = "<h4 class='pet-tips-subtitle'>Cat</h4>"
+          
+          catTipStr += "<ol>"
+          
+          catTip.forEach(element => {
+            catTipStr += element
+          });
+          
+          catTipStr += "</ol>"
 
+          messageList.innerHTML += catTipStr
+          
+          messageList.innerHTML += "<h4 class='pet-tips-subtitle'>Dog</h4>"
+
+          dogTipStr += "<ol>"
+
+          dogTip.forEach(element => {
+            dogTipStr += element
+          });
+
+          dogTipStr += "</ol>"
+
+          messageList.innerHTML += dogTipStr
+        })
       }
 
-      function error() {
-        alert("Sorry, no position available.");
-        location.reload()
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          async position => {
+            const lat = position.coords.latitude
+            const long = position.coords.longitude
+            let openWeatherMapData = await callOpenWeatherMap(lat, long);
+
+            let resultCountry = openWeatherMapData['sys']['country'];
+            let resultCity = openWeatherMapData['name'];
+            let resultTemp = String(Math.round(openWeatherMapData['main']['temp'])) + '°C';
+            let resultHeatIndex = Math.round(openWeatherMapData['main']['feels_like']);
+            let resultWeatherMain = openWeatherMapData['weather'][0]['main'];
+            let resultWeatherDesc = openWeatherMapData['weather'][0]['description'];
+            let resultHeatIndexDesc;
+            let resultWeather;
+
+            // Logic for managing weather
+            console.log(resultWeatherDesc)
+            if (resultWeatherMain === 'Thunderstorm' || resultWeatherMain === 'Drizzle' || resultWeatherMain === 'Rain') {
+              resultWeather = 'Rainy'
+              weather.src = "{{ url_for('static', filename='rainy.png') }}";
+              headerBg.style.backgroundColor = '#71bce4ff';
+              cardColor.style.background = "linear-gradient(121deg, #f6f6f6 31.21%, #71bce4ff 167.04%)";
+            } else if (resultWeatherMain === 'Clouds') {
+              if (resultWeatherDesc === 'few clouds' || resultWeatherDesc === 'scattered clouds') {
+                resultWeather = 'Sunny'
+                weather.src = "{{ url_for('static', filename='sunny.png') }}";
+                headerBg.style.backgroundColor = '#fcffd6';
+                cardColor.style.background = "linear-gradient(121deg, #f6f6f6 31.21%, #fcc949 167.04%)";
+              } else if (resultWeatherDesc === 'broken clouds' || resultWeatherDesc == 'overcast clouds') {
+                resultWeather = 'Cloudy'
+                weather.src = "{{ url_for('static', filename='cloudy.png') }}";
+                headerBg.style.backgroundColor = "#def3f6ff";
+                cardColor.style.background = "linear-gradient(121deg, #f6f6f6 31.21%, #def3f6ff 167.04%)";
+              }
+            } else if (resultWeatherMain === 'Clear') {
+              weather.src = "{{ url_for('static', filename='clear.png') }}";
+              headerBg.style.backgroundColor = "#fcffd6";
+              cardColor.style.background = "linear-gradient(121deg, #f6f6f6 31.21%, #fcc949 167.04%)";
+            }
+
+            // Logic for managing heat index
+            if (resultHeatIndex <= 31) {
+              resultHeatIndexDesc = 'Caution'
+            } else if (resultHeatIndex >= 32 && resultHeatIndex <= 40) {
+              resultHeatIndexDesc = 'Extreme Caution'
+            } else if (resultHeatIndex >= 41 && resultHeatIndex <= 53) {
+              resultHeatIndexDesc = 'Danger'
+            } else {
+              resultHeatIndexDesc = 'Extreme Danger'
+            }
+
+            // Calling the server for tips
+            getSuggestion(resultWeather, resultHeatIndexDesc)
+
+            // Render updates
+            temperature.innerHTML = resultTemp;
+            tempMode.innerHTML = "Sunny"; 
+            locationToUpdate.innerHTML = resultCity + ", " + resultCountry;
+          }
+        );
+      } else {
+        console.log("Location not available")
       }
-
-      const options = {
-        enableHighAccuracy: true,
-        maximumAge: 30000,
-        timeout: 27000,
-      };
-
-      const watchID = navigator.geolocation.watchPosition(success, error, options);
 
       formatDate();
 
@@ -137,56 +223,6 @@
 
         date.innerHTML = `${dayOfWeek}, ${dateOfWeek} ${monthNow}`;
       }
-
-      function temp() {
-        // insert logic for changing temperature and its description
-        temperature.innerHTML = "35°C";
-        tempMode.innerHTML = "Sunny"; 
-      }
-
-      function weatherVisual() {
-        const weatherCondition = getRandomWeather();
-
-        switch (weatherCondition) {
-          case "cloudy":
-            weather.src = "{{ url_for('static', filename='cloudy.png') }}";
-            messageList.innerHTML = "";
-            messageList.innerHTML = `
-              <li>Keep your pet comfortable indoors with cozy bedding and toys.</li>
-              <li>Take short walks with your pet and avoid prolonged exposure to damp weather.</li>
-              <li>Monitor your pet's behavior for signs of anxiety during cloudy periods.</li>`;
-            headerBg.style.backgroundColor = "#def3f6ff";
-            cardColor.style.background =
-              "linear-gradient(121deg, #f6f6f6 31.21%, #def3f6ff 167.04%)";
-            break;
-          case "sunny":
-            weather.src = "{{ url_for('static', filename='sunny.png') }}";
-            messageList.innerHTML = "";
-            messageList.innerHTML = `
-              <li>Hydrate your pet with fresh water, limit midday walks, and provide shade for cool naps.</li>
-              <li>Cool down your pet with damp towels, early walks, and kiddie pools for a refreshing dip.</li>
-              <li>Fresh water, shady spots, and paw protection are your pet's summer essentials!</li>`;
-            headerBg.style.backgroundColor = '#fcffd6';
-            cardColor.style.background =
-              "linear-gradient(121deg, #f6f6f6 31.21%, #fcc949 167.04%)";
-
-            break;
-          case "rainy":
-            weather.src = "{{ url_for('static', filename='rainy.png') }}";
-            messageList.innerHTML = "";
-            messageList.innerHTML = `
-              <li>Hydrate your pet with fresh water, limit midday walks, and provide shade for cool naps.</li>
-              <li>Cool down your pet with damp towels, early walks, and kiddie pools for a refreshing dip.</li>
-              <li>Fresh water, shady spots, and paw protection are your pet's summer essentials!</li>`;
-            headerBg.style.backgroundColor = '#71bce4ff';
-            cardColor.style.background =
-              "linear-gradient(121deg, #f6f6f6 31.21%, #71bce4ff 167.04%)";
-            break;
-        }
-      }
-
-      weatherVisual();
-
     </script>
   </body>
 </html>
