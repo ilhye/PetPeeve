@@ -11,14 +11,15 @@ It comes with a little optimization such as hashing the first two letters and la
 
 
 ## Built With
-* HTML
-* CSS
-* Bootstrap
-* JavaScript
-* Python
-* Flask
-* [OpenWeatherMap](https://openweathermap.org/): This is necessary to get the user's location.
-
+* **HTML:** This builds the structure of the application.
+* **CSS:** Used for adding styles
+* **Bootstrap:** CSS frameworks that is used for adding card and container
+* **JavaScript:** It was used for updating the display
+date on the page and for getting the location of the user.
+* **Python:** Used for building the hash table and rendering HTML.
+* **Flask:** Python framework used to render HTML.
+* **Geolocation:** It is an HTML API which returns the current position of the user.
+* **[OpenWeatherMap](https://openweathermap.org/):** This API is necessary to get the heat index and temperature of a location based on the result from Geolocation.
 
 ## Folder Structure
     .
@@ -32,14 +33,15 @@ It comes with a little optimization such as hashing the first two letters and la
     │   ├── rainy.png
     │   ├── style.css
     │   ├── sunny.png
-    │   │ 
-    │   ├── template
+    │   
+    ├── template
     │   │    ├── index.html
     │   │
-    │   ├── .env
+    │   ├── .env_sample
     │       
     ├── app.py
     ├── hashTableImplementation.py
+    ├── README.md
     ├── requirements.txt 
 
 ## Features
@@ -75,7 +77,7 @@ git clone https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness.git
   ```sh
   pip install -r requirements.txt
   ```
-6. **Add API key:** To get the location get the API key from [openweatherapp.org](https://openweathermap.org/) and navigate to .env_sample, then change it into .env where you should set the API_KEY on the API key you get from the Openweathermap.
+6. **Add API key:** To get the weather information such as heat index and temperature, get the API key from [openweatherapp.org](https://openweathermap.org/) and navigate to .env_sample, then change it into .env where you should set the API_KEY on the API key you get from the Openweathermap.
   ```sh
   API_KEY=YOUR_API_KEY
   ```
