@@ -10,7 +10,7 @@
 It comes with a little optimization such as hashing the first two letters and last letter of the key. To handle collision, this uses a load factor that indicates the fullness of hash table and maintains the complexity of O(1).
 
 
-## Build With
+## Built With
 * HTML
 * CSS
 * Bootstrap
