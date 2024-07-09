@@ -2,6 +2,8 @@
   <img alt="PetHappy" src="https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness/blob/main/static/PetPeeve-banner.png?raw=true">
 </div>
 
+---
+
 ## About the Project
 **PetPeeve: Climate & Pet Wellness** is a Flask web application that provides care tips based on the user's current weather and heat index. It utilizes a hashing and collision algorithm (hash table) implementation with a fast look up for O(1).
 
@@ -34,11 +36,10 @@ It comes with a little optimization such as hashing the first two letters and la
     │   ├── template
     │   │    ├── index.html
     │   │
-    │   ├── .env_sample
+    │   ├── .env
     │       
     ├── app.py
     ├── hashTableImplementation.py
-    ├── README.md
     ├── requirements.txt 
 
 ## Features
