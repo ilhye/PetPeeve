@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="200" alt="PetHappy" src="https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness/blob/main/static/pets.png">
+  <img width="200" alt="PetHappy" src="https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness/blob/main/static/PetPeeve-banner.png?raw=true">
 </div>
 
 
