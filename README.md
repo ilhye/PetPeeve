@@ -89,6 +89,7 @@ python app.py
 
 ## Demo
 <video src="./static/Demo-Installation.mp4" autoplay loop></video>
+https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness/assets/144883820/a29583c3-a02a-4b99-9eb1-5927e82d544f
 
 ## Authors
 - Chua, William Eduard M. ([@veenoise](https://github.com/veenoise))
