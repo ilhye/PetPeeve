@@ -3,9 +3,9 @@
 </div>
 
 ## About the Project
-**[PetPeeve: Climate & Pet Wellness](https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness)** is a Flask web application that provides care tips based on the user's current weather and heat index. It utilizes a hashing and collision algorithm (hash table) implementation with a fast look up for O(1).
+**[PetPeeve: Climate & Pet Wellness](https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness)** is a Flask web application that provides care tips based on the user's current weather and heat index. It utilizes a hashing and collision algorithm (hash table) implementation with a fast look-up for O(1).
 
-It comes with a little optimization such as hashing the first two letters and last letter of the key. To handle collision, this uses a load factor that indicates the fullness of hash table and maintains the complexity of O(1).
+It comes with a little optimization such as hashing the first two letters and the last letter of the key. To handle collision, this uses a load factor that indicates the fullness of the hash table and maintains the complexity of O(1).
 
 
 ## Built With
@@ -88,8 +88,7 @@ python app.py
 * View pet care tips based on the current weather and heat index.
 
 ## Demo
-<video src="./static/Demo-Installation.mp4" autoplay loop></video>
-https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness/assets/144883820/a29583c3-a02a-4b99-9eb1-5927e82d544f
+![Demo](https://www.youtube.com/watch?v=V2ix6nqmblk) 
 
 ## Authors
 - Chua, William Eduard M. ([@veenoise](https://github.com/veenoise))
