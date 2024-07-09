@@ -12,10 +12,9 @@ It comes with a little optimization such as hashing the first two letters and la
 
 ## Built With
 * **HTML:** This builds the structure of the application.
-* **CSS:** Used for adding styles
-* **Bootstrap:** CSS frameworks that is used for adding card and container
-* **JavaScript:** It was used for updating the display
-date on the page and for getting the location of the user.
+* **CSS:** Used for adding styles.
+* **Bootstrap:** CSS frameworks used for adding cards and containers.
+* **JavaScript:** It was used for updating the page's display date and getting the user's location.
 * **Python:** Used for building the hash table and rendering HTML.
 * **Flask:** Python framework used to render HTML.
 * **Geolocation:** It is an HTML API which returns the current position of the user.
@@ -45,8 +44,8 @@ date on the page and for getting the location of the user.
     ├── requirements.txt 
 
 ## Features
-- **Climate-based pet care tips:** Allows user's to determine the action they need to take to tend with their pet needs for specific weather condition. 
-- **User location integration:** Detects the user's location 
+- **Climate-based pet care tips:** Allows users to determine the action they need to take to tend to their pet needs for specific weather conditions. 
+- **User location integration:** Detects the user's location.
 - **Custom hash table:** Implements a custom hash table which maintains a time complexity of O(1).
 - **Responsive:** It support mobile and web devices for easy access.
 
@@ -64,7 +63,7 @@ git clone https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness.git
   ```
 
 3. **Set up a Python virtual environment:**
-    - Type this command in you terminal or cmd:
+    - Type this command in your terminal or cmd:
     ```sh
     python -m venv .venv
     ```
