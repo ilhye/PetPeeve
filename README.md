@@ -10,13 +10,9 @@ This is a Flask web application that provides pet care tips based on the user's 
   <img alt="PetHappy" src="https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness/blob/main/static/OutputSS.PNG">
 </div>
 
-## Built With
-- ![HTML](https://img.shields.io/badge/HTML-E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-- ![Bootstrap](https://img.shields.io/badge/Bootstrap-blueviolet.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
-- ![CSS](https://img.shields.io/badge/CSS-1572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-- ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=white)
-- ![Python](https://img.shields.io/badge/Python-1572B6.svg?style=for-the-badge&logo=Python&logoColor=white)
-- ![Flask](https://img.shields.io/badge/Flask-000000.svg?style=for-the-badge&logo=Flask&logoColor=white)
+![HTML](https://img.shields.io/badge/HTML-E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS-1572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![Bootstrap](https://img.shields.io/badge/Bootstrap-blueviolet.svg?style=for-the-badge&logo=bootstrap&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=white) ![Python](https://img.shields.io/badge/Python-1572B6.svg?style=for-the-badge&logo=Python&logoColor=white) ![Flask](https://img.shields.io/badge/Flask-000000.svg?style=for-the-badge&logo=Flask&logoColor=white)
+
+## API
 
 ## Folder Structure
     .
@@ -79,11 +75,9 @@ This is a Flask web application that provides pet care tips based on the user's 
 ```
     python app.py
 ```
-
-## Deployment
-1. Open your web browser and navigate to http://127.0.0.1:5000/.
-2. Allow location access when prompted.
-3. View pet care tips based on the current weather and heat index.
+8. Open your web browser and navigate to http://127.0.0.1:5000/.
+9. Allow location access when prompted.
+10. View pet care tips based on the current weather and heat index.
 
 ## Authors
 - Chua, William Eduard M. ([@veenoise](https://github.com/veenoise))
