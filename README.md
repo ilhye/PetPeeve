@@ -1,5 +1,14 @@
+<img width="150" alt="PetHappy" src="">
 # PetPeeve: Climate Check & Pet Wellness
 This is a Flask web application that provides pet care tips based on the user's current weather and heat index. It utilizes a custom hashing and collision algorithm (hash table) implementation with a fast look up of O(1).
+
+## Built With
+- ![HTML](https://img.shields.io/badge/HTML-E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+- ![Bootstrap](https://img.shields.io/badge/Bootstrap-blueviolet.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+- ![CSS](https://img.shields.io/badge/CSS-1572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+- ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=white)
+- ![Python](https://img.shields.io/badge/Python-1572B6.svg?style=for-the-badge&logo=Python&logoColor=white)
+- ![Flask](https://img.shields.io/badge/Flask-000000.svg?style=for-the-badge&logo=Flask&logoColor=white)
 
 ## Authors
 - Chua, William Eduard M. ([@veenoise](https://github.com/veenoise))
