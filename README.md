@@ -2,16 +2,23 @@
   <img alt="PetHappy" src="https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness/blob/main/static/PetPeeve-banner.png?raw=true">
 </div>
 
+---
 
-# PetPeeve: Climate Check & Pet Wellness
-This is a Flask web application that provides pet care tips based on the user's current weather and heat index. It utilizes a custom hashing and collision algorithm (hash table) implementation with a fast look up of O(1).
+## About the Project
+**PetPeeve: Climate & Pet Wellness** is a Flask web application that provides care tips based on the user's current weather and heat index. It utilizes a hashing and collision algorithm (hash table) implementation with a fast look up for O(1).
 
-<div align="center">
-  <img alt="PetHappy" src="https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness/blob/main/static/OutputSS.PNG">
-</div>
+It comes with a little optimization such as hashing the first two letters and last letter of the key. To handle collision, this uses a load factor that indicates the fullness of hash table and maintains the complexity of O(1).
 
-![HTML](https://img.shields.io/badge/HTML-E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS-1572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![Bootstrap](https://img.shields.io/badge/Bootstrap-blueviolet.svg?style=for-the-badge&logo=bootstrap&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=white) ![Python](https://img.shields.io/badge/Python-1572B6.svg?style=for-the-badge&logo=Python&logoColor=white) ![Flask](https://img.shields.io/badge/Flask-000000.svg?style=for-the-badge&logo=Flask&logoColor=white)
-## API
+
+## Build With
+* HTML
+* CSS
+* Bootstrap
+* JavaScript
+* Python
+* Flask
+* [OpenWeatherMap](https://openweathermap.org/): This is necessary to get the user's location.
+
 
 ## Folder Structure
     .
@@ -35,52 +42,54 @@ This is a Flask web application that provides pet care tips based on the user's 
     ├── requirements.txt 
 
 ## Features
-- Free and open-source
-- Climate-based pet care tips.
-- User location integration.
-- Custom hash table implementation for efficient data retrieval.
-- Support mobile devices
+- **Climate-based pet care tips:** Allows user's to determine the action they need to take to tend with their pet needs for specific weather condition. 
+- **User location integration:** Detects the user's location 
+- **Custom hash table:** Implements a custom hash table which maintains a time complexity of O(1).
+- **Responsive:** It support mobile and web devices for easy access.
 
-## Usage
-1. Clone this repository
-```
-    git clone https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness.git
-```
+## Installation
+To get a local copy of the repository, follow these steps:
 
-2. Locate project folder:
-```
-    cd PetPeeve-Climate-Check-Pet-Wellness
+1. **Clone the repository:** Get started by cloning the repository to your local machine.
+```sh
+git clone https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness.git
 ```
 
-3. Set up a Python virtual environment:
-```
+2. **Locate project folder:** Navigate the folder where the project folder is stored using cd. 
+  ```sh
+  cd PetPeeve-Climate-Check-Pet-Wellness
+  ```
+
+3. **Set up a Python virtual environment:**
+    - Type this command in you terminal or cmd:
+    ```sh
     python -m venv .venv
-```
-
-4. Activate virtual environment:
-```
+    ```
+    - Activate virtual environment: 
+    ```sh
     .\.venv\Scripts\activate.bat
-```
-5. Install dependencies:
-```
-    pip install -r requirements.txt
-```
-6. Add API key from [openweatherapp.org](https://openweathermap.org/) in .env file
-```
-    API_KEY=YOUR_API_KEY
-```
+    ```
 
-7. Run the application:
+4. **Install dependencies:** It contains the packages needed for running the application
+  ```sh
+  pip install -r requirements.txt
+  ```
+6. **Add API key:** To get the location get the API key from [openweatherapp.org](https://openweathermap.org/) and navigate to .env_sample, then change it into .env where you should set the API_KEY on the API key you get from the Openweathermap.
+  ```sh
+  API_KEY=YOUR_API_KEY
+  ```
+
+7. **Run the application:**
+```sh
+python app.py
 ```
-    python app.py
-```
-8. Open your web browser and navigate to http://127.0.0.1:5000/.
-9. Allow location access when prompted.
-10. View pet care tips based on the current weather and heat index.
+* Open your web browser and navigate to http://127.0.0.1:5000/.
+* Allow location access when prompted.
+* View pet care tips based on the current weather and heat index.
 
 ## Authors
 - Chua, William Eduard M. ([@veenoise](https://github.com/veenoise))
-- David, Abdurasheed A.
-- Egera, Ashley I.
-- Rolle, Xavier
+- David, Abdurasheed A. ([@sheed](davidabdurasheed@gmail.com))
+- Egera, Ashley I. ([@ash](ashleyegera.school@gmail.com))
+- Rolle, Xavier B. ([@xavier](xavierbuen.rolle@gmail.co))
 - Villasor, Cristina C. ([@ilhye](https://github.com/ilhye))
