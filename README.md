@@ -88,7 +88,7 @@ python app.py
 * View pet care tips based on the current weather and heat index.
 
 ## Demo
-![Demo](https://www.youtube.com/watch?v=V2ix6nqmblk) 
+[![PetPeeve Demo](https://img.youtube.com/vi/V2ix6nqmblk/0.jpg)](https://www.youtube.com/watch?v=V2ix6nqmblk)
 
 ## Authors
 - Chua, William Eduard M. ([@veenoise](https://github.com/veenoise))
