@@ -28,6 +28,7 @@ It comes with a little optimization such as hashing the first two letters and la
     │   ├── cloudy.png
     │   ├── location.png
     │   ├── pets.png
+    │   ├── PetPeeve-banner.png
     │   ├── rainy.png
     │   ├── style.css
     │   ├── sunny.png
@@ -35,10 +36,11 @@ It comes with a little optimization such as hashing the first two letters and la
     │   ├── template
     │   │    ├── index.html
     │   │
-    │   ├── .env
+    │   ├── .env_sample
     │       
     ├── app.py
     ├── hashTableImplementation.py
+    ├── README.md
     ├── requirements.txt 
 
 ## Features
