@@ -88,8 +88,7 @@ python app.py
 * View pet care tips based on the current weather and heat index.
 
 ## Demo
-<iframe src="https://www.youtube.com/watch?v=V2ix6nqmblk&t=2s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
+<iframe src="[https://www.youtube.com/embed/V2ix6nqmblk](https://www.youtube.com/watch?v=sh5Ie7DoNPI)" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## Authors
 - Chua, William Eduard M. ([@veenoise](https://github.com/veenoise))
