@@ -40,9 +40,11 @@ This is a Flask web application that provides pet care tips based on the user's 
     ├── requirements.txt 
 
 ## Features
+- Free and open-source
 - Climate-based pet care tips.
 - User location integration.
 - Custom hash table implementation for efficient data retrieval.
+- Support mobile devices
 
 ## Usage
 1. Clone this repository
