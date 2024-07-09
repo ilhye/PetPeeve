@@ -1,4 +1,7 @@
-<img width="200" width="200" alt="PetHappy" src="https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness/blob/main/static/pets.png">
+<div align="center">
+  <img width="200" alt="PetHappy" src="https://github.com/ilhye/PetPeeve-Climate-Check-Pet-Wellness/blob/main/static/pets.png">
+</div>
+
 
 # PetPeeve: Climate Check & Pet Wellness
 This is a Flask web application that provides pet care tips based on the user's current weather and heat index. It utilizes a custom hashing and collision algorithm (hash table) implementation with a fast look up of O(1).
